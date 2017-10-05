@@ -1,17 +1,15 @@
 # Jembi Openhim Docker Repository
 
-* Step 1:
+Process for creating a new Openhim release on Docker hub.
 
-add folder and dockerfile for new release
+* Step 1: Add a new folder for new release candidate. The folder should have the same name as the release version, i.e. `v1.0.0` for release `v1.0.0`
 
-* Step 2:
+* Step 2: Copy the Dockerfile from one of the previous releases. Remember to change the version in Dockerfile to match the new release.
 
-make sure that version in dockerfile is correct
+* Step 3: Create a release tag.
 
-* Step 3:
-
-create a release tag for that version
-
-* Step 4:
-
-log into docker hub to create a build profile
+* Step 4: Log into docker hub to create a build setting for the new release. When adding a new build setting, use the following values:
+  * Type: `Tag`
+  * Name: new release version, i.e. `v1.0.0`
+  * Dockerfile location: Name of the newly created folder
+  * Docker Tag Name: release version
