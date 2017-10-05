@@ -14,6 +14,6 @@ WORKDIR /etc/openhim-core-js
 
 # Install dependencies and build
 RUN npm i
-RUN npm run republish
+RUN npm run build
 
 CMD ["node", "lib/server.js"]
