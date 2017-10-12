@@ -1,5 +1,10 @@
 FROM node:8
 
+ENV NODE_ENV "production"
+
+RUN node -v
+RUN npm -v
+
 WORKDIR /etc
 
 # Update apt-repo list and install prerequisits
