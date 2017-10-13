@@ -1,5 +1,5 @@
-# Openhim Console Dockerfile for latest changes
-FROM ubuntu:16.04
+# Openhim Console Dockerfile for latest changes #ubuntu:16.04
+FROM nginx
 
 WORKDIR /etc/
 
@@ -7,7 +7,7 @@ WORKDIR /etc/
 RUN apt-get update
 RUN apt-get install -y git
 RUN apt-get install -y bzip2
-RUN apt-get install -y curl
+RUN apt-get install -y curl gnupg gnupg2 gnupg1
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get install -y nodejs
 
@@ -19,7 +19,6 @@ WORKDIR /etc/openhim-console
 # Install dependencies and build
 RUN npm i
 RUN npm run build
-RUN npm i -g http-server 
 
-# Host and run server
-CMD http-server ./dist -p 80
+# Deploy static web files to nginx root folder
+RUN cp -r dist/* /usr/share/nginx/html
