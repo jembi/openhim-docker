@@ -1,6 +1,7 @@
 FROM node:6
 
-WORKDIR /etc
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
 ENV OPENHIM_CORE_VERSION 3.3.1
 
