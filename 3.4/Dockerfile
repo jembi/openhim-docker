@@ -2,7 +2,7 @@ FROM node:6
 
 WORKDIR /etc
 
-ENV OPENHIM_CORE_VERSION 3.4.0
+ENV OPENHIM_CORE_VERSION 3.4.2
 
 RUN curl -sL "https://github.com/jembi/openhim-core-js/archive/v$OPENHIM_CORE_VERSION.tar.gz" | \
     tar --strip-components=1 -zxvf - && \
