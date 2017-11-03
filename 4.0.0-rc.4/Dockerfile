@@ -5,9 +5,10 @@ WORKDIR /usr/src/app
 
 ENV OPENHIM_CORE_VERSION 4.0.0-rc.4
 
+RUN npm install npm@5.5.1 -g
+
 RUN curl -sL "https://github.com/jembi/openhim-core-js/archive/v$OPENHIM_CORE_VERSION.tar.gz" | \
     tar --strip-components=1 -zxvf - && \
-    npm install npm@5.5.1 -g && \
     npm install && \
     npm run prepublish
 
