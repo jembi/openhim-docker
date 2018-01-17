@@ -5,9 +5,7 @@ WORKDIR /usr/src/app
 
 RUN curl -sL "https://github.com/jembi/openhim-core-js/archive/master.tar.gz" | \
     tar --strip-components=1 -zxvf - && \
-    yarn install --pure-lockfile && \
-    yarn cache clean && \
-    yarn run build
+    npm i
 
 ENV NODE_ENV "production"
 
