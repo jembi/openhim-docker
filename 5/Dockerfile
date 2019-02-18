@@ -3,7 +3,7 @@ FROM node:10.15.0
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-ENV OPENHIM_CORE_VERSION 5.0.0
+ENV OPENHIM_CORE_VERSION 5.1.0
 
 RUN curl -sL "https://github.com/jembi/openhim-core-js/archive/v$OPENHIM_CORE_VERSION.tar.gz" | \
     tar --strip-components=1 -zxvf - && \
