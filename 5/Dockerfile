@@ -7,9 +7,8 @@ ENV OPENHIM_CORE_VERSION 5.2.0
 
 RUN curl -sL "https://github.com/jembi/openhim-core-js/archive/v$OPENHIM_CORE_VERSION.tar.gz" | \
     tar --strip-components=1 -zxvf - && \
-    yarn install --pure-lockfile && \
-    yarn cache clean && \
-    yarn run build
-
+    npm install && \
+    npm run build && \
+    npm cache clean --force
 
 CMD ["node", "lib/server.js"]
