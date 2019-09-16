@@ -1,10 +1,10 @@
 # Jembi Openhim Docker Repository
 
-Process for creating a new Openhim release on Docker hub.
+The Dockerfiles for [Openhim](http://openhim.readthedocs.io/en/latest/) [Core](https://github.com/jembi/openhim-core-js) and [Console](https://github.com/jembi/openhim-console).
 
 * Step 1: Add a new folder for new release candidate. The folder should have the same name as the release version, i.e. `1.0.0` for release `v1.0.0`
 
-* Step 2: Copy the Dockerfile from one of the previous releases. Remember to change the version in Dockerfile to match the new release.
+We use two branches to track the two sets of files:
 
 * Step 3: Create a release tag. Name the tag as follows: {branch name}-{new release version}, i.e. `console-v1.0.0`
 
