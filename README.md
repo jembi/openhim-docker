@@ -1,6 +1,6 @@
 # Jembi Openhim Docker Repository
 
-Process for creating a new Openhim release on Docker hub
+Process for creating a new Openhim release on Docker hub.
 
 * Step 1: Add a new folder for new release candidate. The folder should have the same name as the release version, i.e. `1.0.0` for release `v1.0.0`
 
