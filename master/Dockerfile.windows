@@ -1,0 +1,43 @@
+FROM mcr.microsoft.com/windows/servercore:ltsc2016 as installer
+
+ENV NPM_CONFIG_LOGLEVEL warn
+
+ARG NODE_VERSION 12.14.1
+ARG GIT_VERSION 2.24.0
+ARG OPENHIM_CORE_VERSION master
+
+SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';$ProgressPreference='silentlyContinue';"]
+
+# Download and install Nodejs
+RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
+    Invoke-WebRequest -OutFile nodejs.zip -UseBasicParsing $('https://nodejs.org/dist/v{0}/node-v{0}-win-x64.zip' -f $env:NODE_VERSION); \
+    Expand-Archive nodejs.zip -DestinationPath C:\; \
+    Rename-Item $('C:\node-v{0}-win-x64' -f $env:NODE_VERSION) c:\nodejs; \
+    $env:PATH = $('{0};C:\nodejs' -f $env:PATH); \
+    Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment\' -Name Path -Value $env:PATH
+
+# Download and install Git
+RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
+    Invoke-WebRequest $('https://github.com/git-for-windows/git/releases/download/v{0}.windows.2/MinGit-{0}.2-64-bit.zip' -f $env:GIT_VERSION) -OutFile MinGit.zip; \
+    Expand-Archive c:\MinGit.zip -DestinationPath c:\MinGit; \
+    $env:PATH = $('{0};C:\MinGit\cmd\;C:\MinGit\cmd' -f $env:PATH); \
+    Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment\' -Name Path -Value $env:PATH
+
+# Download OpenHIM core
+RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
+    Invoke-WebRequest -OutFile nodejs.zip -UseBasicParsing $('https://github.com/jembi/openhim-core-js/archive/{0}.zip' -f $env:OPENHIM_CORE_VERSION); \
+    Expand-Archive $(openhim-core-js-{0}.zip -f $env:OPENHIM_CORE_VERSION) -DestinationPath C:\; \
+    Copy-Item -Path $('C:\openhim-core-js-{0}\openhim-core-js-{0}' -f $env:OPENHIM_CORE_VERSION) -Destination 'C:\app' -Recurse
+
+WORKDIR "C:/app"
+
+RUN npm config set strict-ssl false
+RUN npm config set registry "http://registry.npmjs.org/"
+RUN npm install
+RUN npm run build
+
+EXPOSE 5001
+EXPOSE 5000
+EXPOSE 8080
+
+CMD ["node", "C:/app/lib/server.js"]
