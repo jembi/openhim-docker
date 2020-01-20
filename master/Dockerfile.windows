@@ -2,9 +2,9 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2016 as installer
 
 ENV NPM_CONFIG_LOGLEVEL warn
 
-ARG NODE_VERSION 12.14.1
-ARG GIT_VERSION 2.24.0
-ARG OPENHIM_CORE_VERSION master
+ARG NODE_VERSION=12.14.1
+ARG GIT_VERSION=2.24.0
+ARG OPENHIM_CORE_VERSION=master
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';$ProgressPreference='silentlyContinue';"]
 
