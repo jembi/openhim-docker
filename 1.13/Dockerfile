@@ -4,4 +4,4 @@ WORKDIR /usr/share/nginx/html
 
 ENV OPENHIM_CONSOLE_VERSION 1.13.3
 
-RUN wget -qO- "https://github.com/jembi/openhim-console/releases/download/v$OPENHIM_CONSOLE_VERSION/openhim-console-v$OPENHIM_CONSOLE_VERSION.tar.gz" | tar xvz
+RUN wget -qO- "https://github.com/jembi/openhim-console/releases/download/v$OPENHIM_CONSOLE_VERSION/build.openhim-console.v$OPENHIM_CONSOLE_VERSION.tar.gz" | tar xvz
