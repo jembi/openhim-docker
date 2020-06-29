@@ -8,7 +8,7 @@ RUN apt-get update
 RUN apt-get install -y git
 RUN apt-get install -y bzip2
 RUN apt-get install -y curl gnupg gnupg2 gnupg1
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get install -y nodejs
 
 # Clone Openhim-console repo
